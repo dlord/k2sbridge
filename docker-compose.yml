@@ -1,0 +1,45 @@
+---
+kafka:
+  image: spotify/kafka
+  environment:
+    - AUTO_CREATE_TOPICS=true
+  ports:
+    - 2181:2181
+    - 9092:9092
+
+activemq:
+  image: ayannah/activemq
+  ports:
+    - 61613:61613
+    - 61616:61616
+    - 8161:8161
+
+consumer:
+  build: ./k2sbridge
+  working_dir: /usr/src/k2sbridge
+  command: python consumer.py
+  environment:
+    - KAFKA_TOPIC=test
+    - KAFKA_HOST=kafka
+    - KAFKA_PORT=9092
+    - STOMP_HOST=activemq
+    - STOMP_PORT=61613
+    - STOMP_TOPIC=/queue/test
+  links:
+    - kafka
+    - activemq
+
+producer:
+  build: ./k2sbridge
+  working_dir: /usr/src/k2sbridge
+  command: python producer.py
+  environment:
+    - KAFKA_TOPIC=test2
+    - KAFKA_HOST=kafka
+    - KAFKA_PORT=9092
+    - STOMP_HOST=activemq
+    - STOMP_PORT=61613
+    - STOMP_TOPIC=/queue/test
+  links:
+    - kafka
+    - activemq
