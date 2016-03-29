@@ -3,8 +3,10 @@ import stomp, logging, os
 
 def start():
     logging.info("Starting consumer")
-    assert os.getenv('KAFKA_TOPIC')
-    consumer = KafkaConsumer(os.getenv('KAFKA_TOPIC'),
+    topic = os.getenv('KAFKA_TOPIC')
+    assert topic
+    consumer = KafkaConsumer(topic,
+                             group_id=os.getenv('KAFKA_GROUP_ID', topic),
                              bootstrap_servers=['%s:%s' % (os.getenv('KAFKA_HOST', 'localhost'), os.getenv('KAFKA_PORT', '9092'))])
 
     stomp_conn = stomp.Connection([(os.getenv('STOMP_HOST', 'localhost'), os.getenv('STOMP_PORT', '61613'))],
