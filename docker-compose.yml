@@ -17,8 +17,8 @@ activemq:
 consumer:
   build: ./k2sbridge
   working_dir: /usr/src/k2sbridge
-  command: python consumer.py
   environment:
+    - MODE=consumer
     - KAFKA_TOPIC=test
     - KAFKA_HOST=kafka
     - KAFKA_PORT=9092
@@ -32,8 +32,8 @@ consumer:
 producer:
   build: ./k2sbridge
   working_dir: /usr/src/k2sbridge
-  command: python producer.py
   environment:
+    - MODE=producer
     - KAFKA_TOPIC=test2
     - KAFKA_HOST=kafka
     - KAFKA_PORT=9092

@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+import os, logging
+
+logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s', level=logging.INFO)
+
+mode = os.getenv('MODE')
+assert mode == 'consumer' or mode == 'producer'
+
+logging.info('Selected mode: %s' % mode)
+
+if mode == 'consumer':
+    import consumer
+    consumer.start()
+elif mode == 'producer':
+    import producer
+    producer.start()

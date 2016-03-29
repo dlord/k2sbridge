@@ -6,3 +6,5 @@ RUN cd /usr/src/k2sbridge && \
     pip install -r requirements.txt
 
 COPY . /usr/src/k2sbridge/
+
+CMD /usr/src/k2sbridge/k2sbridge
