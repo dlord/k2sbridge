@@ -8,7 +8,7 @@ def start():
                              bootstrap_servers=['%s:%s' % (os.getenv('KAFKA_HOST', 'localhost'), os.getenv('KAFKA_PORT', '9092'))])
 
     stomp_conn = stomp.Connection([(os.getenv('STOMP_HOST', 'localhost'), os.getenv('STOMP_PORT', '61613'))],
-                                  auto_decode=False))
+                                  auto_decode=False)
     stomp_conn.set_listener('', stomp.PrintingListener())
     stomp_conn.start()
     stomp_conn.connect(wait=True)
