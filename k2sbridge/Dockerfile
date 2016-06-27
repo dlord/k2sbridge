@@ -7,4 +7,6 @@ RUN cd /usr/src/k2sbridge && \
 
 COPY . /usr/src/k2sbridge/
 
+ENV PYTHONUNBUFFERED=1
+
 CMD /usr/src/k2sbridge/k2sbridge
