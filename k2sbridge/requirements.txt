@@ -1,4 +1,4 @@
-kafka==1.0.2
+kafka==1.2.2
 six==1.10.0
-stomp.py==4.1.9
-wheel==0.24.0
+stomp.py==4.1.11
+wheel==0.29.0
