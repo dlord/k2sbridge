@@ -7,7 +7,8 @@ def start():
     assert topic
     consumer = KafkaConsumer(topic,
                              group_id=os.getenv('KAFKA_GROUP_ID', topic),
-                             bootstrap_servers=['%s:%s' % (os.getenv('KAFKA_HOST', 'localhost'), os.getenv('KAFKA_PORT', '9092'))])
+                             bootstrap_servers=['%s:%s' % (os.getenv('KAFKA_HOST', 'localhost'), os.getenv('KAFKA_PORT', '9092'))],
+                             auto_offset_reset='earliest')
 
     stomp_conn = stomp.Connection([(os.getenv('STOMP_HOST', 'localhost'), os.getenv('STOMP_PORT', '61613'))],
                                   auto_decode=False)
